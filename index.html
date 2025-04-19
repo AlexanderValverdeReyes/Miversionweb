@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="form-container">
+        <form action="https://n9.cl/0cy98" method="post">
+            <label for="perfil">Selecciona perfil:</label>
+            <select id="perfil" name="perfil" required>
+                <option value="">Selecciona una opción</option>
+                <option value="administrador">Administrador</option>
+                <option value="usuario">Usuario</option>
+            </select>
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Usuario..." required maxlength="50">
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" placeholder="Correo..." required>
+
+            <label for="clave">Clave:</label>
+            <input type="password" id="clave" name="clave" placeholder="Clave..." required minlength="6" maxlength="20">
+
+            <div class="form-buttons">
+                <button type="submit" class="btn-registrar">Registrar</button>
+                <button type="reset" class="btn-limpiar">Limpiar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
