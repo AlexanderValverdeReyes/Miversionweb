@@ -1,35 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
-    <link rel="stylesheet" href="estilos.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExploraIA</title>
+  <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
-    <div class="form-container">
-        <form action="https://n9.cl/0cy98" method="post">
-            <label for="perfil">Selecciona perfil:</label>
-            <select id="perfil" name="perfil" required>
-                <option value="">Selecciona una opción</option>
-                <option value="administrador">Administrador</option>
-                <option value="usuario">Usuario</option>
-            </select>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="img/logo.jpg" alt="Logo ExploraIA" />
+        <h1>ExploraIA</h1>
+      </div>
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Usuario..." required maxlength="50">
+      <input type="text" placeholder="Search" class="search" />
 
-            <label for="correo">Correo:</label>
-            <input type="email" id="correo" name="correo" placeholder="Correo..." required>
+      <select class="dropdown">
+        <option>Categorías</option>
+      </select>
 
-            <label for="clave">Clave:</label>
-            <input type="password" id="clave" name="clave" placeholder="Clave..." required minlength="6" maxlength="20">
+      <div class="filter">
+        <label>Tus búsquedas:</label>
+        <select>
+          <option>Filtrar</option>
+        </select>
+      </div>
 
-            <div class="form-buttons">
-                <button type="submit" class="btn-registrar">Registrar</button>
-                <button type="reset" class="btn-limpiar">Limpiar</button>
-            </div>
-        </form>
-    </div>
+      <ul class="apps">
+        <li>ChatGPT</li>
+        <li>Jasper</li>
+        <li>Tabnine</li>
+        <li>Replit</li>
+        <li>Consensus</li>
+        <li>DALL·E</li>
+      </ul>
+
+      <button class="more-btn">Mostrar más...</button>
+
+      <div class="bottom-links">
+        <a href="login.html">Registrarse</a>
+        <a href="img/gato.jpg">Ayuda</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <h2>Mas Populares</h2>
+      <div class="grid">
+        <!-- Tarjetas -->
+        <div class="card">
+          <img src="img/desarrollo.jpg" alt="Desarrollo" />
+          <h3>Desarrollo</h3>
+          <p>Info...</p>
+        </div>
+
+        <div class="card">
+          <img src="img/audio.jpg" alt="Audio" />
+          <h3>Audio</h3>
+          <p>Info...</p>
+        </div>
+
+        <div class="card">
+          <img src="img/productividad.jpg" alt="Productividad" />
+          <h3>Productividad</h3>
+          <p>Info...</p>
+        </div>
+
+        <div class="card">
+          <img src="img/logos.jpg" alt="Logos" />
+          <h3>Logos</h3>
+          <p>Info...</p>
+        </div>
+
+        <div class="card">
+          <img src="img/redes.jpg" alt="Redes Sociales" />
+          <h3>Redes Sociales</h3>
+          <p>Info...</p>
+        </div>
+
+        <div class="card">
+          <img src="img/gaming.jpg" alt="Gaming" />
+          <h3>Gaming</h3>
+          <p>Info...</p>
+        </div>
+
+        <div class="card">
+          <img src="img/entretenimiento.jpg" alt="Entretenimiento" />
+          <h3>Entretenimi</h3>
+          <p>Info...</p>
+        </div>
+
+        <div class="card">
+          <img src="img/analisis.jpg" alt="Análisis" />
+          <h3>Análisis</h3>
+          <p>Info...</p>
+        </div>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
