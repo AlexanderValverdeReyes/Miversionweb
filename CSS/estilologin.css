@@ -29,13 +29,13 @@ body {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    background: linear-gradient(to right, #00b09b, #96c93d);
+    background: linear-gradient(to right, #ffffff, #ffffff);
     color: white;
     transition: background 0.3s ease;
 }
 
 .selector-container button:hover {
-    background: linear-gradient(to right, #96c93d, #00b09b);
+    background: linear-gradient(to right, #ffffff, #ffffff);
 }
 
 .form-container {
@@ -164,14 +164,14 @@ input:-webkit-autofill:active {
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      background: linear-gradient(to right, #00b09b, #96c93d);
+      background: linear-gradient(to right, #2e3b53, #2e3b53);
       color: white;
       transition: background 0.3s ease;
       text-align: center;
     }
 
     .opcion:hover {
-      background: linear-gradient(to right, #96c93d, #00b09b);
+      background: linear-gradient(to right, #44577a, #44577a);
     }
 
     .formulario {

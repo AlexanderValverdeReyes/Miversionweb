@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login o Registro</title>
-  <link rel="stylesheet" href="estilologin.css" />
+  <link rel="stylesheet" href="CSS/estilologin.css" />
 </head>
 <body>
+
   <div class="container">
 
     <!-- Botones para cambiar entre formularios -->
@@ -16,7 +17,8 @@
     </div>
 
     <!-- Formulario de Inicio de Sesión -->
-    <form id="form-login" class="formulario activo" onsubmit="redirigirAlVideo(event)">
+    <form id="form-login" class="formulario activo" onsubmit="iniciarSesion(event)">
+
       
       <label for="correo-login">Correo:</label>
       <input type="email" id="correo-login" name="correo" placeholder="Correo..." required />
@@ -58,10 +60,10 @@
     </form>
   </div>
   <script>
-    function redirigirAlVideo(event) {
+    function iniciarSesion(event) {
       event.preventDefault(); // Evita el envío real del formulario
-      // Aquí puedes validar si quieres
-      window.location.href = "https://youtube.com/shorts/7zBtLUzoYa0?si=zS6-hYweTAcmca8G"; // URL directa al video
+      localStorage.setItem("usuarioLogueado", "true"); // Guarda el estado de sesión
+      window.location.href = "index.html"; // Redirige a la pantalla principal
     }
   </script>
 
@@ -80,5 +82,6 @@
       }
     }
   </script>
+
 </body>
 </html>
