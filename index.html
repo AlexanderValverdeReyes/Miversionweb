@@ -8,6 +8,27 @@
 </head>
 <body>
 
+<!-- Pantalla de Bienvenida -->
+<div id="bienvenida" class="pantalla-bienvenida">
+  <div class="fondo-neon"></div>
+  <div class="contenido-bienvenida">
+    <img src="img/logo.jpg" alt="Logo de ExploraIA" class="logo-bienvenida" />
+    <h1 class="nombre-empresa">ExploraIA</h1>
+    <div class="botones-acciones no-logueado">
+      <button class="boton-accion" id="btnLogin">Iniciar sesión</button>
+      <button class="boton-accion" id="btnRegister">Registrarse</button>
+      <button class="boton-accion" id="btnInvitado">Continuar como invitado</button>
+    </div>
+    
+    <div class="botones-acciones logueado" style="display: none;">
+      <button class="boton-accion" id="btnExplorar">Explorar</button>
+    </div>
+    
+  </div>
+</div>
+
+
+
   <div class="container">
     <!-- Sidebar -->
     <aside class="sidebar">
@@ -51,7 +72,8 @@
       <button class="more-btn">Mostrar más...</button>
 
       <div class="bottom-links">
-        <a id="link-sesion" href="login.html">Registrarse</a>
+        <a id="link-sesion" href="login.html">Inciar Sesion </a>
+        <a id="link-register" href="register.html">Registrarse</a>
         <a href="img/gato.jpg">Ayuda</a>
       </div>
       
@@ -132,58 +154,105 @@
       </div>
     </main>
   </div>
-
-  <script>
-    function cerrarSesion() {
-      localStorage.removeItem("usuarioLogueado");
-      location.reload(); // Recarga la página para ocultar elementos
-    }
-  </script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const estaLogueado = localStorage.getItem("usuarioLogueado") === "true";
-  
       const filtro = document.querySelector('.filter');
       const historial = document.querySelector('.apps');
       const linkSesion = document.getElementById('link-sesion');
-  
+      const linkRegister = document.getElementById('link-register');
+      const bienvenida = document.getElementById("bienvenida");
+      const botonesLogueado = document.querySelector('.botones-acciones.logueado');
+      const botonesNoLogueado = document.querySelector('.botones-acciones.no-logueado');
+      const container = document.querySelector('.container');
+    
+      const yaVioBienvenida = sessionStorage.getItem("yaVioBienvenida") === "true";
+    
+      // Mostrar bienvenida solo si no la ha visto
+      if (!yaVioBienvenida) {
+        bienvenida.style.display = "flex";
+        container.style.display = "none";
+      } else {
+        bienvenida.style.display = "none";
+        container.style.display = "flex";
+      }
+    
+      // Configura estado de botones y visibilidad según login
       if (!estaLogueado) {
-        if (filtro) {
-          filtro.style.opacity = '0';
-          filtro.style.pointerEvents = 'none';
-        }
-        if (historial) {
-          historial.style.opacity = '0';
-          historial.style.pointerEvents = 'none';
-        }
+        if (filtro) filtro.style.opacity = '0';
+        if (filtro) filtro.style.pointerEvents = 'none';
+        if (historial) historial.style.opacity = '0';
+        if (historial) historial.style.pointerEvents = 'none';
+    
         if (linkSesion) {
-          linkSesion.textContent = "Registrarse";
+          linkSesion.textContent = "Iniciar Sesión";
           linkSesion.setAttribute("href", "login.html");
         }
+    
+        if (linkRegister) {
+          linkRegister.textContent = "Registrarse";
+          linkRegister.setAttribute("href", "register.html");
+          linkRegister.style.display = "inline";
+        }
       } else {
-        if (filtro) {
-          filtro.style.opacity = '1';
-          filtro.style.pointerEvents = 'auto';
-        }
-        if (historial) {
-          historial.style.opacity = '1';
-          historial.style.pointerEvents = 'auto';
-        }
+        if (filtro) filtro.style.opacity = '1';
+        if (filtro) filtro.style.pointerEvents = 'auto';
+        if (historial) historial.style.opacity = '1';
+        if (historial) historial.style.pointerEvents = 'auto';
+    
         if (linkSesion) {
           linkSesion.textContent = "Cerrar Sesión";
           linkSesion.href = "#";
-          linkSesion.addEventListener("click", function(e) {
+          linkSesion.addEventListener("click", function (e) {
             e.preventDefault();
             localStorage.removeItem("usuarioLogueado");
-            location.reload();
+            sessionStorage.removeItem("yaVioBienvenida"); // ← Importante
+            location.reload(); // ← Volver a mostrar bienvenida con botones
+          });
+        }
+    
+        if (linkRegister) {
+          linkRegister.style.display = "none";
+        }
+    
+        // Mostrar la ventana de bienvenida y explorar solo si el usuario está logueado
+        if (estaLogueado) {
+          botonesNoLogueado.style.display = "none";
+          botonesLogueado.style.display = "flex";
+    
+          // Si el usuario está logueado, al hacer clic en explorar, se oculta la bienvenida y muestra el contenido principal
+          document.getElementById("btnExplorar").addEventListener("click", () => {
+            bienvenida.classList.add("desaparecer");
+            setTimeout(() => {
+              bienvenida.style.display = "none";
+              container.style.display = "flex";
+              sessionStorage.setItem("yaVioBienvenida", "true"); // Guardar que ya vio la bienvenida
+            }, 1000);
           });
         }
       }
+    
+      // Comportamiento de botones de bienvenida
+      if (!estaLogueado) {
+        // Si no está logueado, se pueden usar estos botones para continuar como invitado o acceder al login/register
+        document.getElementById("btnInvitado").addEventListener("click", () => {
+          // NO se guarda como logueado, solo permite pasar esta sesión
+          sessionStorage.setItem("yaVioBienvenida", "true");
+          bienvenida.classList.add("desaparecer");
+          setTimeout(() => {
+            bienvenida.style.display = "none";
+            container.style.display = "flex";
+          }, 1000);
+        });
+    
+        document.getElementById("btnLogin").addEventListener("click", () => {
+          window.location.href = "login.html";
+        });
+    
+        document.getElementById("btnRegister").addEventListener("click", () => {
+          window.location.href = "register.html";
+        });
+      }
     });
-  </script>
-  
-  
-  
-  
-</body>
-</html>
+    </script>
+    

@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #2c3e50);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+}
+
+h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 15px;
+    color: #ffffff;
+    margin-bottom: 6px;
+    display: block;
+    text-align: left;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+option {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+input:focus,
+select:focus {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Botones */
+button {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-registrar {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+}
+
+.btn-registrar:hover {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+}
+
+.btn-limpiar {
+    background: linear-gradient(to right, #f12711, #f5af19);
+}
+
+.btn-limpiar:hover {
+    background: linear-gradient(to right, #f5af19, #f12711);
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+/* Glassmorphism fix para autocompletar */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
+    background-color: transparent !important;
+}
+
+/* Estilo para el enlace entre login y registro */
+a {
+    color: #00f2fe;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}

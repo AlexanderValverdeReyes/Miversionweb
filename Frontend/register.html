@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro</title>
+  <link rel="stylesheet" href="/CSS/estilologin.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h2>Registro</h2>
+    <form id="form-registro" class="formulario" onsubmit="redirigirAlVideo(event)">
+      <label for="Genero">Género:</label>
+      <select id="Genero" name="Genero" required>
+        <option value="">Selecciona una opción</option>
+        <option value="femenino">Femenino</option>
+        <option value="masculino">Masculino</option>
+        <option value="39 tipos de gei">39 Tipos De Gei</option>
+      </select>
+
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Usuario..." required maxlength="50"/>
+
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" name="correo" placeholder="Correo..." required/>
+
+      <label for="clave">Clave:</label>
+      <input type="password" id="clave" name="clave" placeholder="Clave..." required minlength="6" maxlength="20"/>
+
+      <div class="form-buttons">
+        <button type="submit" class="btn-registrar">Registrar</button>
+        <button type="reset" class="btn-limpiar">Limpiar</button>
+      </div>
+    </form>
+    <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+  </div>
+
+  <script>
+     async function redirigirAlVideo(event) {
+    event.preventDefault();
+
+    const userData = {
+      nombre: document.getElementById("nombre").value,
+      email: document.getElementById("correo").value,
+      password: document.getElementById("clave").value,
+      genero: document.getElementById("Genero").value
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.setItem("usuarioLogueado", "true");
+        window.location.href = "index.html";
+      } else {
+        alert(data.error || "Error al registrarse");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error al conectar con el servidor");
+    }
+  }
+  </script>
+  
+
+</body>
+</html>
