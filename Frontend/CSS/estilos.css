@@ -96,7 +96,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Fuerza 4 columnas */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
 
@@ -224,4 +224,24 @@ body {
 .desaparecer {
   opacity: 0;
   transition: opacity 2.5s ease;
+}
+
+/* adaptacion a pantallas o resoluciones */ 
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ExploraIA</title>
   <link rel="stylesheet" href="/CSS/estilos.css" />
@@ -39,18 +40,17 @@
 
       <input type="text" placeholder="Search" class="search" />
 
-      <div class="dropdown">
-        <label>Categorias:</label>
-        <select>
-        <option value=""  disabled selected hidden>Elegir</option>
-        <option>Inicio</option>
-        <option>Chatbots</option>
-        <option>Generacion</option>
-        <option>Productividad</option>
-        <option>Marketing y redes</option>
-        <option>Musica</option>
-      </select>
-      </div>
+    <div class="dropdown">
+  <label>Categorías:</label>
+  <select id="categorySelector">
+    <option value="all" selected>Inicio</option>
+    <option value="chatbots">Chatbots</option>
+    <option value="generacion">Generación</option>
+    <option value="productividad">Productividad</option>
+    <option value="marketing">Marketing y redes</option>
+    <option value="musica">Música</option>
+  </select>
+</div>
 
       <div class="filter">
         <label>Tus búsquedas:</label>
@@ -80,76 +80,84 @@
     </aside>
 
     <!-- Main Content -->
+   
     <main class="main">
+        <div class="category-section" data-category="all"></div>
       <h2>Mas Populares</h2>
       <div class="grid">
         <!-- Tarjetas -->
-        <a href="HTML/informacion/chatgpt.html" class="card">
-          <img src="img/paneles/chatgpt.jpg" alt="ChatGPT" />
-          <h3>ChatGPT</h3>
-          <p>Ver más...</p>
-        </a>
+<a href="HTML/informacion/chatgpt.html" class="card" data-category="chatbots">
+  <img src="img/paneles/chatgpt.jpg" alt="ChatGPT" />
+  <h3>ChatGPT</h3>
+  <p>Ver más...</p>
+</a>
         
-        <a href="HTML/informacion/claude.html" class="card">
-          <img src="img/paneles/claudeai.jpg" alt="Claude Ai" />
-          <h3>Claude AI</h3>
-          <p>Ver mas...</p>
-        </a>
+<a href="HTML/informacion/claude.html" class="card" data-category="chatbots">
+  <img src="img/paneles/claudeai.jpg" alt="Claude AI" />
+  <h3>Claude AI</h3>
+  <p>Ver más...</p>
+</a>
 
-        <a href="HTML/informacion/dall-e.html" class="card">
-          <img src="img/paneles/gemini.jpg" alt="Gemini" />
-          <h3>Gemini</h3>
-          <p>Ver mas...</p>
-        </a>
+<a href="HTML/informacion/deepsek.html" class="card" data-category="chatbots">
+  <img src="img/paneles/deepsek.jpg" alt="DeepSeek" />
+  <h3>DeepSeek</h3>
+  <p>Ver más...</p>
+</a>
 
-        <a href="HTML/informacion/deepsek.html" class="card">
-          <img src="img/paneles/deepsek.jpg" alt="Deepsek" />
-          <h3>Deepsek</h3>
-          <p>Ver mas...</p>
-        </a>
+<a href="HTML/informacion/gemini.html" class="card" data-category="chatbots">
+  <img src="img/paneles/gemini.jpg" alt="Gemini" />
+  <h3>Gemini</h3>
+  <p>Ver más...</p>
+</a>
 
-        <a href="HTML/informacion/dall-e.html" class="card">
-          <img src="img/paneles/dall-e.jpg" alt="DALL-E 3" />
-          <h3>DALL-E</h3>
-          <p>Ver mas...</p>
-        </a>
+<a href="HTML/informacion/dall-e.html" class="card" data-category="generacion">
+  <img src="img/paneles/dall-e.jpg" alt="DALL·E" />
+  <h3>DALL·E</h3>
+  <p>Ver más...</p>
+</a>
 
-        <a href="HTML/informacion/synthesia.html" class="card">
-          <img src="img/paneles/synthesia.jpg" alt="Synthesia" />
-          <h3>Synthesia</h3>
-          <p>Ver mas...</p>
-        </a>
+<a href="HTML/informacion/midjourney.html" class="card" data-category="generacion">
+  <img src="img/paneles/midjourney.jpeg" alt="Midjourney" />
+  <h3>Midjourney</h3>
+  <p>Ver más...</p>
+</a>
 
-        <a href="HTML/informacion/midjourney.html" class="card">
-          <img src="img/paneles/midjourney.jpeg" alt="Midjourney" />
-          <h3>Midjourney</h3>
-          <p>Ver mas...</p>
-        </a>
+<a href="HTML/informacion/synthesia.html" class="card" data-category="generacion">
+  <img src="img/paneles/synthesia.jpg" alt="Synthesia" />
+  <h3>Synthesia</h3>
+  <p>Ver más...</p>
+</a>
 
-        <a href="HTML/informacion/runway.html" class="card">
-          <img src="img/paneles/runway.jpg" alt="Runway" />
-          <h3>Runway</h3>
-          <p>Ver mas...</p>
-        </a>
-        <a href="HTML/informacion/notion.html" class="card">
-          <img src="img/paneles/notion.jpg" alt="Notion AI" />
-          <h3>Notion AI</h3>
-          <p>Ver mas...</p>
-        </a>
-        <a href="HTML/informacion/grammarly.html" class="card">
-          <img src="img/paneles/grammarly.jpg" alt="Grammarly" />
-          <h3>Grammarly</h3>
-          <p>Ver mas...</p>
-        </a>
-        <a href="HTML/informacion/feedhive.html" class="card">
-          <img src="img/paneles/FeedHive.jpg" alt="FeedHive" />
-          <h3>FeedHive</h3>
-          <p>Ver mas...</p>
-        </a>
-        <a href="HTML/informacion/suno.html" class="card">
-          <img src="img/paneles/suno.jpg" alt="Suno" />
-          <h3>Suno</h3>
-          <p>Ver mas...</p>
+<a href="HTML/informacion/runway.html" class="card" data-category="generacion">
+  <img src="img/paneles/runway.jpg" alt="Runway" />
+  <h3>Runway</h3>
+  <p>Ver más...</p>
+</a>
+
+<a href="HTML/informacion/notion.html" class="card" data-category="productividad">
+  <img src="img/paneles/notion.jpg" alt="Notion AI" />
+  <h3>Notion AI</h3>
+  <p>Ver más...</p>
+</a>
+
+<a href="HTML/informacion/grammarly.html" class="card" data-category="productividad">
+  <img src="img/paneles/grammarly.jpg" alt="Grammarly" />
+  <h3>Grammarly</h3>
+  <p>Ver más...</p>
+</a>
+
+<a href="HTML/informacion/feedhive.html" class="card" data-category="marketing">
+  <img src="img/paneles/FeedHive.jpg" alt="FeedHive" />
+  <h3>FeedHive</h3>
+  <p>Ver más...</p>
+</a>
+
+<a href="HTML/informacion/suno.html" class="card" data-category="musica">
+  <img src="img/paneles/suno.jpg" alt="Suno" />
+  <h3>Suno</h3>
+  <p>Ver más...</p>
+</a>
+
         </a>
       </div>
     </main>
@@ -256,3 +264,18 @@
     });
     </script>
     
+    <script>
+  document.getElementById("categorySelector").addEventListener("change", function () {
+    const selectedCategory = this.value;
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute("data-category");
+      if (selectedCategory === "all" || selectedCategory === cardCategory) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+</script>
