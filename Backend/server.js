@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configuración para servir archivos estáticos (frontend)
+// Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, '../Frontend')));
 
 // Conexión a SQLite
@@ -17,7 +17,7 @@ const db = new sqlite3.Database('./database.db', (err) => {
     console.log('Conectado a SQLite.');
 });
 
-// Crear tabla de usuarios (con campos adicionales para el registro)
+// Crear tabla de usuarios si no existe
 db.run(`
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,10 +28,20 @@ db.run(`
     )
 `);
 
-// Ruta de registro (POST /api/register)
+// Crear tabla historial si no existe
+db.run(`
+    CREATE TABLE IF NOT EXISTS historial (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        termino TEXT NOT NULL,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+`);
+
+// Ruta para registro
 app.post('/api/register', async (req, res) => {
     const { nombre, email, password, genero } = req.body;
-    
     if (!nombre || !email || !password || !genero) {
         return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
     }
@@ -45,10 +55,7 @@ app.post('/api/register', async (req, res) => {
                 if (err) {
                     return res.status(400).json({ error: 'El correo ya está registrado.' });
                 }
-                res.json({ 
-                    success: true, 
-                    user_id: this.lastID 
-                });
+                res.json({ success: true, user_id: this.lastID });
             }
         );
     } catch (err) {
@@ -56,10 +63,9 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-// Ruta de login (POST /api/login)
+// Ruta para login
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
-    
     if (!email || !password) {
         return res.status(400).json({ error: 'Correo y contraseña son obligatorios.' });
     }
@@ -75,21 +81,68 @@ app.post('/api/login', async (req, res) => {
             if (!isValid) {
                 return res.status(401).json({ error: 'Contraseña incorrecta.' });
             }
-            res.json({ 
-                success: true, 
-                user_id: user.id 
-            });
+            res.json({ success: true, user_id: user.id });
         }
     );
 });
 
-// Ruta raíz para servir login.html
+// Ruta para guardar búsqueda
+app.post('/api/historial', (req, res) => {
+    const { user_id, termino } = req.body;
+    if (!user_id || !termino) {
+        return res.status(400).json({ error: 'Faltan datos.' });
+    }
+
+    // Evitar duplicado inmediato (último término igual)
+    db.get(
+        `SELECT termino FROM historial 
+         WHERE user_id = ? 
+         ORDER BY timestamp DESC LIMIT 1`,
+        [user_id],
+        (err, row) => {
+            if (err) return res.status(500).json({ error: 'Error al verificar historial.' });
+
+            if (row && row.termino.toLowerCase() === termino.toLowerCase()) {
+                return res.json({ success: true, message: "Búsqueda duplicada ignorada." });
+            }
+
+            // Insertar término nuevo
+            db.run(
+                'INSERT INTO historial (user_id, termino) VALUES (?, ?)',
+                [user_id, termino],
+                function (err) {
+                    if (err) {
+                        return res.status(500).json({ error: 'Error al guardar historial.' });
+                    }
+                    res.json({ success: true });
+                }
+            );
+        }
+    );
+});
+
+// Ruta para obtener historial por usuario
+app.get('/api/historial/:user_id', (req, res) => {
+    const userId = req.params.user_id;
+    db.all(
+        'SELECT termino, timestamp FROM historial WHERE user_id = ? ORDER BY timestamp DESC LIMIT 10',
+        [userId],
+        (err, rows) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error al obtener historial.' });
+            }
+            res.json(rows);
+        }
+    );
+});
+
+// Ruta raíz
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Frontend/index.html'));
 });
 
 // Iniciar servidor
-const PORT = 5000; // Usamos el puerto 5000 como en tus fetch
+const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`Servidor backend en http://localhost:${PORT}`);
 });

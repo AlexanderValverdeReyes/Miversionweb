@@ -29,9 +29,9 @@
 </div>
 
 
-
+ <button id="toggleSidebarBtn" class="toggle-sidebar">☰</button>
   <div class="container">
-    <!-- Sidebar -->
+    <!-- Sidebar -->    
     <aside class="sidebar">
       <div class="logo">
         <img src="img/logo.jpg" alt="Logo ExploraIA" />
@@ -39,6 +39,14 @@
       </div>
 
       <input type="text" placeholder="Search" class="search" />
+
+
+<div class="filter">
+        <label>Tus búsquedas:</label>
+        <select>
+          <option value="" disabled selected hidden></option>
+        </select>
+      </div>
 
     <div class="dropdown">
   <label>Categorías:</label>
@@ -52,22 +60,8 @@
   </select>
 </div>
 
-      <div class="filter">
-        <label>Tus búsquedas:</label>
-        <select>
-          <option value="" disabled selected hidden></option>
-          <option>Filtrar</option>
-        </select>
-      </div>
+      
 
-      <ul class="apps">
-        <li>ChatGPT</li>
-        <li>Jasper</li>
-        <li>Tabnine</li>
-        <li>Replit</li>
-        <li>Consensus</li>
-        <li>DALL·E</li>
-      </ul>
 
       <button class="more-btn">Mostrar más...</button>
 
@@ -276,6 +270,92 @@
       } else {
         card.style.display = "none";
       }
+    });
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector(".search");
+  const tarjetas = document.querySelectorAll(".card");
+  const filtroSelect = document.querySelector(".filter select");
+  const userId = localStorage.getItem("user_id");
+
+  // Buscar y mostrar resultados en tiempo real
+  searchInput.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") {
+      const termino = searchInput.value.toLowerCase().trim();
+      if (!termino) return;
+
+      // Filtrado de tarjetas
+      tarjetas.forEach(card => {
+        const titulo = card.querySelector("h3").textContent.toLowerCase();
+        const categoria = card.getAttribute("data-category");
+        if (titulo.includes(termino) || categoria.includes(termino)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      // Guardar historial solo si hay usuario logueado
+      if (userId) {
+        try {
+          await fetch("http://localhost:5000/api/historial", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_id: userId, termino }),
+          });
+          cargarHistorial(); // ← actualiza la lista luego de guardar
+        } catch (err) {
+          console.error("Error al guardar historial:", err);
+        }
+      }
+    }
+  });
+
+  // Cargar historial en el <select>
+  async function cargarHistorial() {
+    if (!userId) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/historial/${userId}`);
+      const historial = await res.json();
+
+      // Limpiar y cargar
+      filtroSelect.innerHTML = `<option value="" disabled selected hidden></option>`;
+      historial.forEach(item => {
+        const option = document.createElement("option");
+        option.textContent = item.termino;
+        option.value = item.termino;
+        filtroSelect.appendChild(option);
+      });
+
+      // Permitir volver a filtrar desde el historial
+      filtroSelect.addEventListener("change", (e) => {
+        searchInput.value = e.target.value;
+        const evento = new KeyboardEvent("keydown", { key: "Enter" });
+        searchInput.dispatchEvent(evento);
+      });
+
+    } catch (err) {
+      console.error("Error al cargar historial:", err);
+    }
+  }
+
+  // Cargar historial al iniciar si está logueado
+  if (userId) {
+    cargarHistorial();
+  }
+});
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("toggleSidebarBtn");
+    const sidebar = document.querySelector(".sidebar");
+    const container = document.querySelector(".container");
+
+    toggleBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("oculto");
+      container.classList.toggle("con-sidebar-oculta");
     });
   });
 </script>
