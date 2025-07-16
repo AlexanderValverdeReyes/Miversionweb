@@ -23,6 +23,8 @@
       </div>
     </form>
     <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+
+    <button onclick="irAInicio()" class="btn-volver-inicio">Volver al Inicio</button>
   </div>
 
   <script>
@@ -31,8 +33,10 @@
       localStorage.setItem("usuarioLogueado", "true");
       window.location.href = "index.html";
     }
+     function irAInicio() {
+      window.location.href = "index.html";
+    }
   </script>
 
 </body>
 </html>
-s

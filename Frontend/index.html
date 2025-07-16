@@ -2,36 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ExploraIA</title>
   <link rel="stylesheet" href="/CSS/estilos.css" />
 </head>
+
 <body>
-
-<!-- Pantalla de Bienvenida -->
-<div id="bienvenida" class="pantalla-bienvenida">
-  <div class="fondo-neon"></div>
-  <div class="contenido-bienvenida">
-    <img src="img/logo.jpg" alt="Logo de ExploraIA" class="logo-bienvenida" />
-    <h1 class="nombre-empresa">ExploraIA</h1>
-    <div class="botones-acciones no-logueado">
-      <button class="boton-accion" id="btnLogin">Iniciar sesión</button>
-      <button class="boton-accion" id="btnRegister">Registrarse</button>
-      <button class="boton-accion" id="btnInvitado">Continuar como invitado</button>
+  <!-- Modal de Ayuda -->
+  <div id="modalAyuda" class="ventana-ayuda" style="display: none;">
+    <p>¿Realmente necesitas ayuda?</p>
+    <div class="botones-ayuda">
+      <button id="btnSi">Sí</button>
+      <button id="btnNo">No</button>
     </div>
-    
-    <div class="botones-acciones logueado" style="display: none;">
-      <button class="boton-accion" id="btnExplorar">Explorar</button>
-    </div>
-    
   </div>
-</div>
 
+  <!-- Pantalla de Bienvenida -->
+  <div id="bienvenida" class="pantalla-bienvenida">
+    <div class="fondo-neon"></div>
+    <div class="contenido-bienvenida">
+      <img src="img/logo.jpg" alt="Logo de ExploraIA" class="logo-bienvenida" />
+      <h1 class="nombre-empresa">ExploraIA</h1>
+      <div class="botones-acciones no-logueado">
+        <button class="boton-accion" id="btnLogin">Iniciar sesión</button>
+        <button class="boton-accion" id="btnRegister">Registrarse</button>
+        <button class="boton-accion" id="btnInvitado">Continuar como invitado</button>
+      </div>
+      <div class="botones-acciones logueado" style="display: none;">
+        <button class="boton-accion" id="btnExplorar">Explorar</button>
+      </div>
+    </div>
+  </div>
 
- <button id="toggleSidebarBtn" class="toggle-sidebar">☰</button>
+  <button id="toggleSidebarBtn" class="toggle-sidebar">☰</button>
   <div class="container">
-    <!-- Sidebar -->    
     <aside class="sidebar">
       <div class="logo">
         <img src="img/logo.jpg" alt="Logo ExploraIA" />
@@ -40,44 +44,49 @@
 
       <input type="text" placeholder="Search" class="search" />
 
-
-<div class="filter">
+      <div class="filter">
         <label>Tus búsquedas:</label>
         <select>
           <option value="" disabled selected hidden></option>
         </select>
+        <button id="btnLimpiarHistorial" class="btn-limpiar-historial">Limpiar historial</button>
       </div>
 
-    <div class="dropdown">
-  <label>Categorías:</label>
-  <select id="categorySelector">
-    <option value="all" selected>Inicio</option>
-    <option value="chatbots">Chatbots</option>
-    <option value="generacion">Generación</option>
-    <option value="productividad">Productividad</option>
-    <option value="marketing">Marketing y redes</option>
-    <option value="musica">Música</option>
-  </select>
+      <div class="dropdown">
+        <label>Categorías:</label>
+        <select id="categorySelector">
+          <option value="all" selected>Inicio</option>
+          <option value="chatbots">Chatbots</option>
+          <option value="generacion">Generación</option>
+          <option value="productividad">Productividad</option>
+          <option value="marketing">Marketing y redes</option>
+          <option value="musica">Música</option>
+        </select>
+      </div>
+
+<input type="checkbox" id="btn-modal" />
+<label for="btn-modal" class="more-btn">Mostrar más...</label>
+
+<!-- Modal -->
+<div class="container-modal">
+  <div class="content-modal">
+    <h2>AUTORES</h2>
+    <p>Alexander, Percy, Estrellita</p>
+    <div class="btn-cerrar">
+      <label for="btn-modal">Cerrar</label>
+    </div>
+  </div>
 </div>
-
-      
-
-
-      <button class="more-btn">Mostrar más...</button>
-
       <div class="bottom-links">
-        <a id="link-sesion" href="login.html">Inciar Sesion </a>
+        <a id="link-sesion" href="login.html">Iniciar Sesión</a>
         <a id="link-register" href="register.html">Registrarse</a>
-        <a href="img/gato.jpg">Ayuda</a>
+        <a href="#" id="btnAyuda">Ayuda</a>
       </div>
-      
     </aside>
 
-    <!-- Main Content -->
-   
     <main class="main">
-        <div class="category-section" data-category="all"></div>
-      <h2>Mas Populares</h2>
+      <div class="category-section" data-category="all"></div>
+      <h2>Más Populares</h2>
       <div class="grid">
         <!-- Tarjetas -->
 <a href="HTML/informacion/chatgpt.html" class="card" data-category="chatbots">
@@ -151,7 +160,96 @@
   <h3>Suno</h3>
   <p>Ver más...</p>
 </a>
-
+<a href="HTML/informacion/aidungeon.html" class="card" data-category="chatbots">
+  <img src="img/paneles/aidungeon.png" alt="AI Dungeon" />
+  <h3>AI Dungeon</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/aistudycards.html" class="card" data-category="productividad">
+  <img src="img/paneles/aistudycards.png" alt="AIStudyCards" />
+  <h3>AIStudyCards</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/artguru.html" class="card" data-category="generacion">
+  <img src="img/paneles/artguru.png" alt="Artguru" />
+  <h3>Artguru</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/consensus.html" class="card" data-category="productividad">
+  <img src="img/paneles/consensus.png" alt="Consensus" />
+  <h3>Consensus</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/deepai.html" class="card" data-category="generacion">
+  <img src="img/paneles/deepai.png" alt="DeepAI" />
+  <h3>DeepAI</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/elevenlabs.html" class="card" data-category="musica">
+  <img src="img/paneles/elevenlabs.png" alt="ElevenLabs" />
+  <h3>ElevenLabs</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/freepikai.html" class="card" data-category="generacion">
+  <img src="img/paneles/freepikai.png" alt="Freepik AI" />
+  <h3>Freepik AI</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/gizai.html" class="card" data-category="musica">
+  <img src="img/paneles/gizai.png" alt="Giz.ai" />
+  <h3>Giz.ai</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/magicshotai.html" class="card" data-category="generacion">
+  <img src="img/paneles/magicshotai.png" alt="MagicShot.ai" />
+  <h3>MagicShot.ai</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/notyai.html" class="card" data-category="productividad">
+  <img src="img/paneles/notyai.png" alt="Noty.ai" />
+  <h3>Noty.ai</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/otterai.html" class="card" data-category="productividad">
+  <img src="img/paneles/otterai.png" alt="Otter.ai" />
+  <h3>Otter.ai</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/quickdraw.html" class="card" data-category="chatbots">
+  <img src="img/paneles/quickdraw.png" alt="Quick Draw" />
+  <h3>Quick Draw</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/quizlet.html" class="card" data-category="productividad">
+  <img src="img/paneles/quizlet.png" alt="Quizlet" />
+  <h3>Quizlet</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/seaartai.html" class="card" data-category="generacion">
+  <img src="img/paneles/seaartai.png" alt="SeaArt AI" />
+  <h3>SeaArt AI</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/studleyai.html" class="card" data-category="productividad">
+  <img src="img/paneles/studleyai.png" alt="Studley.ai" />
+  <h3>Studley.ai</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/topviewai.html" class="card" data-category="generacion">
+  <img src="img/paneles/topviewai.png" alt="TopView AI" />
+  <h3>TopView AI</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/vivaai.html" class="card" data-category="generacion">
+  <img src="img/paneles/vivaai.png" alt="Viva.ai" />
+  <h3>Viva.ai</h3>
+  <p>Ver más...</p>
+</a>
+<a href="HTML/informacion/vozoai.html" class="card" data-category="generacion">
+  <img src="img/paneles/vozoai.png" alt="Vozo.ai" />
+  <h3>Vozo.ai</h3>
+  <p>Ver más...</p>
+</a>
         </a>
       </div>
     </main>
@@ -273,31 +371,38 @@
     });
   });
 </script>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.querySelector(".search");
   const tarjetas = document.querySelectorAll(".card");
   const filtroSelect = document.querySelector(".filter select");
+  const btnLimpiarHistorial = document.getElementById("btnLimpiarHistorial");
   const userId = localStorage.getItem("user_id");
 
-  // Buscar y mostrar resultados en tiempo real
+  // Mostrar todas las tarjetas
+  function mostrarTodasLasTarjetas() {
+    tarjetas.forEach(card => {
+      card.style.display = "block";
+    });
+  }
+
+  // Buscar y mostrar resultados
   searchInput.addEventListener("keydown", async (e) => {
     if (e.key === "Enter") {
       const termino = searchInput.value.toLowerCase().trim();
-      if (!termino) return;
 
-      // Filtrado de tarjetas
+      if (!termino) {
+        mostrarTodasLasTarjetas();
+        return;
+      }
+
       tarjetas.forEach(card => {
         const titulo = card.querySelector("h3").textContent.toLowerCase();
         const categoria = card.getAttribute("data-category");
-        if (titulo.includes(termino) || categoria.includes(termino)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
+        card.style.display = (titulo.includes(termino) || categoria.includes(termino)) ? "block" : "none";
       });
 
-      // Guardar historial solo si hay usuario logueado
       if (userId) {
         try {
           await fetch("http://localhost:5000/api/historial", {
@@ -305,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user_id: userId, termino }),
           });
-          cargarHistorial(); // ← actualiza la lista luego de guardar
+          cargarHistorial();
         } catch (err) {
           console.error("Error al guardar historial:", err);
         }
@@ -313,35 +418,64 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Cargar historial en el <select>
+  // Mostrar tarjetas al limpiar input
+  searchInput.addEventListener("keyup", () => {
+    if (searchInput.value.trim() === "") {
+      mostrarTodasLasTarjetas();
+    }
+  });
+
+  // Cargar historial único y ordenado
   async function cargarHistorial() {
     if (!userId) return;
     try {
       const res = await fetch(`http://localhost:5000/api/historial/${userId}`);
       const historial = await res.json();
 
-      // Limpiar y cargar
-      filtroSelect.innerHTML = `<option value="" disabled selected hidden></option>`;
+      const mapaHistorial = new Map();
       historial.forEach(item => {
+        const termino = item.termino.toLowerCase();
+        if (!mapaHistorial.has(termino)) {
+          mapaHistorial.set(termino, item);
+        }
+      });
+
+      filtroSelect.innerHTML = `<option value="" disabled selected hidden></option>`;
+      for (const item of mapaHistorial.values()) {
         const option = document.createElement("option");
         option.textContent = item.termino;
         option.value = item.termino;
         filtroSelect.appendChild(option);
-      });
-
-      // Permitir volver a filtrar desde el historial
-      filtroSelect.addEventListener("change", (e) => {
-        searchInput.value = e.target.value;
-        const evento = new KeyboardEvent("keydown", { key: "Enter" });
-        searchInput.dispatchEvent(evento);
-      });
+      }
 
     } catch (err) {
       console.error("Error al cargar historial:", err);
     }
+
+    // Evento para usar historial
+    filtroSelect.addEventListener("change", (e) => {
+      searchInput.value = e.target.value;
+      const evento = new KeyboardEvent("keydown", { key: "Enter" });
+      searchInput.dispatchEvent(evento);
+    });
   }
 
-  // Cargar historial al iniciar si está logueado
+  // Limpiar historial del usuario
+  btnLimpiarHistorial?.addEventListener("click", async () => {
+    if (!userId) return;
+    if (!confirm("¿Estás seguro de que deseas eliminar tu historial de búsqueda?")) return;
+
+    try {
+      await fetch(`http://localhost:5000/api/historial/${userId}`, {
+        method: "DELETE"
+      });
+      filtroSelect.innerHTML = `<option value="" disabled selected hidden></option>`;
+    } catch (err) {
+      console.error("Error al eliminar historial:", err);
+    }
+  });
+
+  // Cargar historial al iniciar
   if (userId) {
     cargarHistorial();
   }
@@ -359,3 +493,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 </script>
+</body>
+</html>

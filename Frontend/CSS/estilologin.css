@@ -133,3 +133,15 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.btn-volver-inicio {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #777;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-volver-inicio:hover {
+  background-color: #555;
+}
